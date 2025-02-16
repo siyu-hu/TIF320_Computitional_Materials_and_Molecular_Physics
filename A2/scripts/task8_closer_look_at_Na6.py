@@ -8,8 +8,8 @@ from ase.optimize import BFGS
 #struct2 = read('task7_second_lowest_energy_structure.xyz')
 
 # Read standard structures
-struct1 = read('standard_christmas_tree.xyz')
-struct2 = read('standard_half_decahedron.xyz')
+struct1 = read('../standard_christmas_tree.xyz')
+struct2 = read('../standard_half_decahedron.xyz')
 
 # Define at least 6 different parameter sets
 parameter_sets = [

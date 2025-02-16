@@ -2,7 +2,7 @@ from ase.db import connect
 from ase.io import write
 
 # Connect to the database 
-db = connect('gadb.db')
+db = connect('../gadb.db') # ATTENTION: changing for Na8/Na7/Na6/
 
 # Find the structure with the lowest energy
 rows = db.select(sort='energy', limit=1)

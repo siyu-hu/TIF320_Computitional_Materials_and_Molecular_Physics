@@ -9,7 +9,7 @@ def structures_are_different(struct1, struct2, threshold=0.5):
     return np.abs(pos1 - pos2).min() > threshold
 
 # Connect to database
-db = connect('gadb.db')
+db = connect('../gadb.db')
 
 # Get sorted entries by energy
 rows = db.select(sort='energy')
