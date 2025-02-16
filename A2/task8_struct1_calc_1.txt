@@ -1,0 +1,763 @@
+
+  ___ ___ ___ _ _ _  
+ |   |   |_  | | | | 
+ | | | | | . | | | | 
+ |__ |  _|___|_____|  25.1.0
+ |___|_|             
+
+User:   zoe@Zoes-MacBook-Air.local
+Date:   Sun Feb 16 18:53:14 2025
+Arch:   arm64
+Pid:    60072
+CWD:    /Users/zoe/Documents/GitHub/TIF320_Computitional_Materials_and_Molecular_Physics
+Python: 3.12.2
+gpaw:   /opt/anaconda3/envs/tif320env/lib/python3.12/site-packages/gpaw
+_gpaw:  /opt/anaconda3/envs/tif320env/lib/python3.12/site-packages/
+        _gpaw.cpython-312-darwin.so
+ase:    /opt/anaconda3/envs/tif320env/lib/python3.12/site-packages/ase (version 3.24.0)
+numpy:  /opt/anaconda3/envs/tif320env/lib/python3.12/site-packages/numpy (version 2.0.1)
+scipy:  /opt/anaconda3/envs/tif320env/lib/python3.12/site-packages/scipy (version 1.15.1)
+libxc:  7.0.0
+units:  Angstrom and eV
+cores: 1
+OpenMP: False
+OMP_NUM_THREADS: 1
+
+Input parameters:
+  mode: {ecut: 400.0,
+         name: pw}
+
+System changes: positions, numbers, cell, pbc, initial_charges, initial_magmoms 
+
+Initialize ...
+
+species:
+  Na:
+    name: Sodium
+    id: 74d681ec425db66acd6a232eb07f04e6
+    Z: 11.0
+    valence: 7
+    core: 4
+    charge: 0.0
+    file: /opt/anaconda3/envs/tif320env/gpaw-setups/gpaw-setups-24.11.0/Na.LDA.gz
+    compensation charges: {type: gauss,
+                           rc: 0.37,
+                           lmax: 2}
+    cutoffs: {filter: 2.17,
+              core: 2.59}
+    projectors:
+      #              energy  rcut
+      - 3s(1.00)    -2.819   1.201
+      - 2p(6.00)   -28.826   1.217
+      - 3p(0.00)    -0.774   1.217
+      -  s          24.392   1.201
+      -  d           0.000   1.238
+  
+    # Using partial waves for Na as LCAO basis
+
+Reference energy: -26392.251266  # eV
+
+Spin-paired calculation
+
+Convergence criteria:
+ Maximum [total energy] change in last 3 cyles: 0.0005 eV / valence electron
+ Maximum integral of absolute [dens]ity change: 0.0001 electrons / valence electron
+ Maximum integral of absolute [eigenst]ate change: 4e-08 eV^2 / valence electron
+ Maximum number of scf [iter]ations: 333
+ (Square brackets indicate name in SCF output, whereas a 'c' in
+ the SCF output indicates the quantity has converged.)
+
+Symmetries present (total): 1
+
+  ( 1  0  0)
+  ( 0  1  0)
+  ( 0  0  1)
+
+1 k-point (Gamma)
+1 k-point in the irreducible part of the Brillouin zone
+       k-points in crystal coordinates                weights
+   0:     0.00000000    0.00000000    0.00000000          1/1
+
+Wave functions: Plane wave expansion
+  Cutoff energy: 400.000 eV
+  Number of coefficients: 74269 (reduced to 37135)
+  Pulay-stress correction: 0.000000 eV/Ang^3 (de/decut=0.000000)
+  Using Numpy's FFT
+  ScaLapack parameters: grid=1x1, blocksize=None
+  Wavefunction extrapolation:
+    Improved wavefunction reuse through dual PAW basis 
+
+Occupation numbers: # Zero width 
+
+Eigensolver
+   Davidson(niter=2) 
+
+Densities:
+  Coarse grid: 75*75*75 grid
+  Fine grid: 150*150*150 grid
+  Total Charge: 0.000000 
+
+Density mixing:
+  Method: separate
+  Backend: pulay
+  Linear mixing parameter: 0.05
+  old densities: 5
+  Damping of long wavelength oscillations: 50 
+
+Hamiltonian:
+  XC and Coulomb potentials evaluated on a 150*150*150 grid
+  Using the LDA Exchange-Correlation functional
+  External potential:
+    NoExternalPotential
+ 
+
+Memory estimate:
+  Process memory now: 286.80 MiB
+  Calculator: 300.45 MiB
+    Density: 194.57 MiB
+      Arrays: 83.68 MiB
+      Localized functions: 78.70 MiB
+      Mixer: 32.19 MiB
+    Hamiltonian: 56.32 MiB
+      Arrays: 54.72 MiB
+      XC: 0.00 MiB
+      Poisson: 0.00 MiB
+      vbar: 1.61 MiB
+    Wavefunctions: 49.56 MiB
+      Arrays psit_nG: 17.00 MiB
+      Eigensolver: 19.90 MiB
+      Projections: 0.02 MiB
+      Projectors: 3.97 MiB
+      PW-descriptor: 8.68 MiB
+
+Total number of cores used: 1
+
+Number of atoms: 6
+Number of atomic orbitals: 42
+Number of bands in calculation: 30
+Number of valence electrons: 42
+Bands to converge: occupied
+
+... initialized
+
+Initializing position-dependent things.
+
+Density initialized from atomic densities
+Creating initial wave functions:
+  30 bands from LCAO basis set
+
+           .--------------------------------------.  
+          /|                                      |  
+         / |                                      |  
+        /  |                                      |  
+       /   |                                      |  
+      /    |                                      |  
+     /     |                                      |  
+    /      |                                      |  
+   /       |                                      |  
+  /        |                                      |  
+ *         |           Na                         |  
+ |         |                                      |  
+ |         |                Na                    |  
+ |         |                                      |  
+ |         |            Na                        |  
+ |         |                    Na                |  
+ |         |                                      |  
+ |         |                Na                    |  
+ |         |                                      |  
+ |         |             Na                       |  
+ |         .--------------------------------------.  
+ |        /                                      /   
+ |       /                                      /    
+ |      /                                      /     
+ |     /                                      /      
+ |    /                                      /       
+ |   /                                      /        
+ |  /                                      /         
+ | /                                      /          
+ |/                                      /           
+ *--------------------------------------*            
+
+Positions:
+   0 Na    11.424955    5.046215    9.661160    ( 0.0000,  0.0000,  0.0000)
+   1 Na     9.091214    7.135542   10.719357    ( 0.0000,  0.0000,  0.0000)
+   2 Na     6.710298    9.263471   11.516303    ( 0.0000,  0.0000,  0.0000)
+   3 Na     7.680133    8.011559    5.125248    ( 0.0000,  0.0000,  0.0000)
+   4 Na     9.624253    6.463545    7.292195    ( 0.0000,  0.0000,  0.0000)
+   5 Na     7.055205    8.690646    8.283979    ( 0.0000,  0.0000,  0.0000)
+
+Unit cell:
+           periodic     x           y           z      points  spacing
+  1. axis:    no    16.000000    0.000000    0.000000    75     0.2133
+  2. axis:    no     0.000000   16.000000    0.000000    75     0.2133
+  3. axis:    no     0.000000    0.000000   16.000000    75     0.2133
+
+  Lengths:  16.000000  16.000000  16.000000
+  Angles:   90.000000  90.000000  90.000000
+
+Effective grid spacing dv^(1/3) = 0.2133
+
+     iter     time        total  log10-change:
+                         energy   eigst   dens
+iter:   1 18:53:17    -5.516524
+iter:   2 18:53:19    -5.532930   -0.99  -1.34
+iter:   3 18:53:21    -5.420065   -1.41  -1.37
+iter:   4 18:53:23    -5.420384   -1.83  -1.70
+iter:   5 18:53:24    -5.422099c  -2.12  -1.73
+iter:   6 18:53:26    -5.424590c  -2.50  -2.19
+iter:   7 18:53:28    -5.424937c  -2.92  -2.50
+iter:   8 18:53:30    -5.424185c  -3.26  -2.51
+iter:   9 18:53:32    -5.424323c  -3.64  -2.79
+iter:  10 18:53:34    -5.424357c  -4.02  -3.22
+iter:  11 18:53:35    -5.424362c  -4.37  -3.24
+iter:  12 18:53:37    -5.424368c  -4.70  -3.34
+iter:  13 18:53:39    -5.424370c  -5.05  -3.56
+iter:  14 18:53:41    -5.424365c  -5.38  -3.59
+iter:  15 18:53:43    -5.424363c  -5.68  -3.59
+iter:  16 18:53:45    -5.424363c  -5.99  -3.71
+iter:  17 18:53:47    -5.424360c  -6.15  -3.77
+iter:  18 18:53:49    -5.424360c  -6.57  -4.04c
+iter:  19 18:53:50    -5.424359c  -6.78  -4.18c
+iter:  20 18:53:52    -5.424359c  -7.12  -4.74c
+iter:  21 18:53:54    -5.424359c  -7.31  -4.79c
+iter:  22 18:53:56    -5.424359c  -7.55c -5.15c
+
+Converged after 22 iterations.
+
+Dipole moment: (0.017227, -0.008195, -0.011464) |e|*Ang
+
+Energy contributions relative to reference atoms: (reference = -26392.251266)
+
+Kinetic:         +5.091123
+Potential:       -4.742737
+External:        +0.000000
+XC:              -5.530409
+Entropy (-ST):   +0.000000
+Local:           -0.242336
+SIC:             +0.000000
+--------------------------
+Free energy:     -5.424359
+Extrapolated:    -5.424359
+
+ Band  Eigenvalues  Occupancy
+    0    -28.01738    2.00000
+    1    -28.01379    2.00000
+    2    -28.01376    2.00000
+    3    -28.01286    2.00000
+    4    -28.01120    2.00000
+    5    -28.00906    2.00000
+    6    -28.00867    2.00000
+    7    -28.00844    2.00000
+    8    -28.00671    2.00000
+    9    -27.89954    2.00000
+   10    -27.89022    2.00000
+   11    -27.88337    2.00000
+   12    -27.88255    2.00000
+   13    -27.88197    2.00000
+   14    -27.87860    2.00000
+   15    -27.85183    2.00000
+   16    -27.84610    2.00000
+   17    -27.84184    2.00000
+   18     -4.00931    2.00000
+   19     -3.00459    2.00000
+   20     -3.00214    2.00000
+   21     -1.75807    0.00000
+   22     -1.63146    0.00000
+   23     -1.61164    0.00000
+   24     -1.41138    0.00000
+   25     -0.66403    0.00000
+   26     -0.62981    0.00000
+   27     -0.61517    0.00000
+   28     -0.55570    0.00000
+   29     -0.45614    0.00000
+
+Fermi level: -2.38010
+
+Gap: 1.244 eV
+Transition (v -> c):
+  (s=0, k=0, n=20, [0.00, 0.00, 0.00]) -> (s=0, k=0, n=21, [0.00, 0.00, 0.00])
+No difference between direct/indirect transitions
+
+Forces in eV/Ang:
+  0 Na   -0.00334    0.00309    0.00187
+  1 Na    0.00057   -0.00200   -0.02196
+  2 Na   -0.00296    0.00140   -0.00227
+  3 Na   -0.00045   -0.00125    0.00005
+  4 Na   -0.01217    0.01048    0.01502
+  5 Na    0.01824   -0.01173    0.00730
+
+System changes: positions 
+
+Initializing position-dependent things.
+
+Density initialized from wave functions
+           .--------------------------------------.  
+          /|                                      |  
+         / |                                      |  
+        /  |                                      |  
+       /   |                                      |  
+      /    |                                      |  
+     /     |                                      |  
+    /      |                                      |  
+   /       |                                      |  
+  /        |                                      |  
+ *         |           Na                         |  
+ |         |                                      |  
+ |         |                Na                    |  
+ |         |                                      |  
+ |         |            Na                        |  
+ |         |                    Na                |  
+ |         |                                      |  
+ |         |                Na                    |  
+ |         |                                      |  
+ |         |             Na                       |  
+ |         .--------------------------------------.  
+ |        /                                      /   
+ |       /                                      /    
+ |      /                                      /     
+ |     /                                      /      
+ |    /                                      /       
+ |   /                                      /        
+ |  /                                      /         
+ | /                                      /          
+ |/                                      /           
+ *--------------------------------------*            
+
+Positions:
+   0 Na    11.424907    5.046259    9.661187    ( 0.0000,  0.0000,  0.0000)
+   1 Na     9.091222    7.135513   10.719044    ( 0.0000,  0.0000,  0.0000)
+   2 Na     6.710255    9.263491   11.516270    ( 0.0000,  0.0000,  0.0000)
+   3 Na     7.680126    8.011541    5.125248    ( 0.0000,  0.0000,  0.0000)
+   4 Na     9.624079    6.463694    7.292410    ( 0.0000,  0.0000,  0.0000)
+   5 Na     7.055465    8.690479    8.284084    ( 0.0000,  0.0000,  0.0000)
+
+Unit cell:
+           periodic     x           y           z      points  spacing
+  1. axis:    no    16.000000    0.000000    0.000000    75     0.2133
+  2. axis:    no     0.000000   16.000000    0.000000    75     0.2133
+  3. axis:    no     0.000000    0.000000   16.000000    75     0.2133
+
+  Lengths:  16.000000  16.000000  16.000000
+  Angles:   90.000000  90.000000  90.000000
+
+Effective grid spacing dv^(1/3) = 0.2133
+
+     iter     time        total  log10-change:
+                         energy   eigst   dens
+iter:   1 18:53:59    -5.424382   -6.84
+iter:   2 18:54:01    -5.424382   -7.46c -4.37c
+iter:   3 18:54:03    -5.424381c  -7.75c -4.43c
+
+Converged after 3 iterations.
+
+Dipole moment: (0.017330, -0.008301, -0.011465) |e|*Ang
+
+Energy contributions relative to reference atoms: (reference = -26392.251266)
+
+Kinetic:         +5.091128
+Potential:       -4.742260
+External:        +0.000000
+XC:              -5.530766
+Entropy (-ST):   +0.000000
+Local:           -0.242484
+SIC:             +0.000000
+--------------------------
+Free energy:     -5.424381
+Extrapolated:    -5.424381
+
+ Band  Eigenvalues  Occupancy
+    0    -28.01756    2.00000
+    1    -28.01396    2.00000
+    2    -28.01392    2.00000
+    3    -28.01291    2.00000
+    4    -28.01128    2.00000
+    5    -28.00911    2.00000
+    6    -28.00872    2.00000
+    7    -28.00848    2.00000
+    8    -28.00676    2.00000
+    9    -27.89959    2.00000
+   10    -27.89022    2.00000
+   11    -27.88338    2.00000
+   12    -27.88258    2.00000
+   13    -27.88198    2.00000
+   14    -27.87863    2.00000
+   15    -27.85184    2.00000
+   16    -27.84613    2.00000
+   17    -27.84186    2.00000
+   18     -4.00950    2.00000
+   19     -3.00461    2.00000
+   20     -3.00217    2.00000
+   21     -1.75822    0.00000
+   22     -1.63135    0.00000
+   23     -1.61156    0.00000
+   24     -1.41148    0.00000
+   25     -0.66405    0.00000
+   26     -0.62988    0.00000
+   27     -0.61516    0.00000
+   28     -0.55576    0.00000
+   29     -0.45608    0.00000
+
+Fermi level: -2.38020
+
+Gap: 1.244 eV
+Transition (v -> c):
+  (s=0, k=0, n=20, [0.00, 0.00, 0.00]) -> (s=0, k=0, n=21, [0.00, 0.00, 0.00])
+No difference between direct/indirect transitions
+
+Forces in eV/Ang:
+  0 Na   -0.00336    0.00310    0.00185
+  1 Na    0.00039   -0.00182   -0.02191
+  2 Na   -0.00283    0.00132   -0.00232
+  3 Na   -0.00050   -0.00116    0.00017
+  4 Na   -0.01221    0.01053    0.01510
+  5 Na    0.01824   -0.01169    0.00720
+
+System changes: positions 
+
+Initializing position-dependent things.
+
+Density initialized from wave functions
+           .--------------------------------------.  
+          /|                                      |  
+         / |                                      |  
+        /  |                                      |  
+       /   |                                      |  
+      /    |                                      |  
+     /     |                                      |  
+    /      |                                      |  
+   /       |                                      |  
+  /        |                                      |  
+ *         |           Na                         |  
+ |         |                                      |  
+ |         |                Na                    |  
+ |         |                                      |  
+ |         |            Na                        |  
+ |         |                    Na                |  
+ |         |                                      |  
+ |         |                Na                    |  
+ |         |                                      |  
+ |         |             Na                       |  
+ |         .--------------------------------------.  
+ |        /                                      /   
+ |       /                                      /    
+ |      /                                      /     
+ |     /                                      /      
+ |    /                                      /       
+ |   /                                      /        
+ |  /                                      /         
+ | /                                      /          
+ |/                                      /           
+ *--------------------------------------*            
+
+Positions:
+   0 Na    11.395532    5.073441    9.677404    ( 0.0000,  0.0000,  0.0000)
+   1 Na     9.094770    7.119397   10.527080    ( 0.0000,  0.0000,  0.0000)
+   2 Na     6.685366    9.275153   11.495993    ( 0.0000,  0.0000,  0.0000)
+   3 Na     7.675806    8.001259    5.126622    ( 0.0000,  0.0000,  0.0000)
+   4 Na     9.517205    6.555889    7.424597    ( 0.0000,  0.0000,  0.0000)
+   5 Na     7.215192    8.588017    8.347241    ( 0.0000,  0.0000,  0.0000)
+
+Unit cell:
+           periodic     x           y           z      points  spacing
+  1. axis:    no    16.000000    0.000000    0.000000    75     0.2133
+  2. axis:    no     0.000000   16.000000    0.000000    75     0.2133
+  3. axis:    no     0.000000    0.000000   16.000000    75     0.2133
+
+  Lengths:  16.000000  16.000000  16.000000
+  Angles:   90.000000  90.000000  90.000000
+
+Effective grid spacing dv^(1/3) = 0.2133
+
+     iter     time        total  log10-change:
+                         energy   eigst   dens
+iter:   1 18:54:07    -5.445187   -1.45
+iter:   2 18:54:08    -5.423722   -2.16  -1.67
+iter:   3 18:54:10    -5.363880   -2.47  -1.74
+iter:   4 18:54:12    -5.363829   -2.98  -2.29
+iter:   5 18:54:14    -5.364406c  -3.36  -2.33
+iter:   6 18:54:16    -5.364702c  -3.67  -2.53
+iter:   7 18:54:18    -5.364668c  -4.12  -2.84
+iter:   8 18:54:20    -5.364680c  -4.50  -3.13
+iter:   9 18:54:22    -5.364646c  -4.85  -3.37
+iter:  10 18:54:24    -5.364647c  -5.24  -3.67
+iter:  11 18:54:26    -5.364647c  -5.65  -3.95
+iter:  12 18:54:28    -5.364648c  -6.01  -3.97
+iter:  13 18:54:30    -5.364648c  -6.35  -4.05c
+iter:  14 18:54:31    -5.364649c  -6.70  -4.15c
+iter:  15 18:54:33    -5.364648c  -6.93  -4.21c
+iter:  16 18:54:35    -5.364648c  -7.31  -4.54c
+iter:  17 18:54:37    -5.364648c  -7.56c -4.66c
+
+Converged after 17 iterations.
+
+Dipole moment: (0.032979, -0.024062, -0.017730) |e|*Ang
+
+Energy contributions relative to reference atoms: (reference = -26392.251266)
+
+Kinetic:         +6.910971
+Potential:       -5.975573
+External:        +0.000000
+XC:              -6.057648
+Entropy (-ST):   +0.000000
+Local:           -0.242398
+SIC:             +0.000000
+--------------------------
+Free energy:     -5.364648
+Extrapolated:    -5.364648
+
+ Band  Eigenvalues  Occupancy
+    0    -28.03236    2.00000
+    1    -28.02768    2.00000
+    2    -28.02683    2.00000
+    3    -28.01657    2.00000
+    4    -28.01316    2.00000
+    5    -28.01196    2.00000
+    6    -28.00588    2.00000
+    7    -28.00234    2.00000
+    8    -27.99925    2.00000
+    9    -27.88308    2.00000
+   10    -27.84281    2.00000
+   11    -27.84006    2.00000
+   12    -27.83608    2.00000
+   13    -27.83408    2.00000
+   14    -27.82461    2.00000
+   15    -27.80015    2.00000
+   16    -27.79454    2.00000
+   17    -27.77941    2.00000
+   18     -4.11330    2.00000
+   19     -3.00601    2.00000
+   20     -2.97156    2.00000
+   21     -1.82318    0.00000
+   22     -1.54147    0.00000
+   23     -1.52746    0.00000
+   24     -1.46715    0.00000
+   25     -0.65393    0.00000
+   26     -0.63929    0.00000
+   27     -0.59162    0.00000
+   28     -0.56272    0.00000
+   29     -0.38538    0.00000
+
+Fermi level: -2.39737
+
+Gap: 1.148 eV
+Transition (v -> c):
+  (s=0, k=0, n=20, [0.00, 0.00, 0.00]) -> (s=0, k=0, n=21, [0.00, 0.00, 0.00])
+No difference between direct/indirect transitions
+
+Forces in eV/Ang:
+  0 Na    0.05095   -0.04499   -0.01028
+  1 Na   -0.02086    0.03597    0.26570
+  2 Na    0.02609   -0.02253    0.00013
+  3 Na   -0.00099    0.00020    0.00242
+  4 Na    0.11769   -0.11398   -0.19826
+  5 Na   -0.17239    0.14495   -0.05972
+
+System changes: positions 
+
+Initializing position-dependent things.
+
+Density initialized from wave functions
+           .--------------------------------------.  
+          /|                                      |  
+         / |                                      |  
+        /  |                                      |  
+       /   |                                      |  
+      /    |                                      |  
+     /     |                                      |  
+    /      |                                      |  
+   /       |                                      |  
+  /        |                                      |  
+ *         |           Na                         |  
+ |         |                                      |  
+ |         |                Na                    |  
+ |         |                                      |  
+ |         |            Na                        |  
+ |         |                    Na                |  
+ |         |                                      |  
+ |         |                Na                    |  
+ |         |                                      |  
+ |         |             Na                       |  
+ |         .--------------------------------------.  
+ |        /                                      /   
+ |       /                                      /    
+ |      /                                      /     
+ |     /                                      /      
+ |    /                                      /       
+ |   /                                      /        
+ |  /                                      /         
+ | /                                      /          
+ |/                                      /           
+ *--------------------------------------*            
+
+Positions:
+   0 Na    11.422521    5.048470    9.662525    ( 0.0000,  0.0000,  0.0000)
+   1 Na     9.091493    7.134213   10.703367    ( 0.0000,  0.0000,  0.0000)
+   2 Na     6.708213    9.264436   11.514582    ( 0.0000,  0.0000,  0.0000)
+   3 Na     7.679766    8.010684    5.125365    ( 0.0000,  0.0000,  0.0000)
+   4 Na     9.615317    6.471239    7.303186    ( 0.0000,  0.0000,  0.0000)
+   5 Na     7.068566    8.682115    8.289274    ( 0.0000,  0.0000,  0.0000)
+
+Unit cell:
+           periodic     x           y           z      points  spacing
+  1. axis:    no    16.000000    0.000000    0.000000    75     0.2133
+  2. axis:    no     0.000000   16.000000    0.000000    75     0.2133
+  3. axis:    no     0.000000    0.000000   16.000000    75     0.2133
+
+  Lengths:  16.000000  16.000000  16.000000
+  Angles:   90.000000  90.000000  90.000000
+
+Effective grid spacing dv^(1/3) = 0.2133
+
+     iter     time        total  log10-change:
+                         energy   eigst   dens
+iter:   1 18:54:40    -5.515413   -1.40
+iter:   2 18:54:42    -5.492398   -2.11  -1.66
+iter:   3 18:54:44    -5.424927   -2.44  -1.72
+iter:   4 18:54:46    -5.424185   -2.97  -2.28
+iter:   5 18:54:48    -5.424641c  -3.36  -2.35
+iter:   6 18:54:50    -5.425099c  -3.68  -2.49
+iter:   7 18:54:52    -5.425147c  -4.06  -2.73
+iter:   8 18:54:53    -5.425131c  -4.48  -3.27
+iter:   9 18:54:55    -5.425100c  -4.84  -3.36
+iter:  10 18:54:57    -5.425098c  -5.22  -3.80
+iter:  11 18:54:59    -5.425098c  -5.62  -4.00
+iter:  12 18:55:01    -5.425098c  -5.99  -4.02c
+iter:  13 18:55:02    -5.425098c  -6.34  -4.21c
+iter:  14 18:55:04    -5.425098c  -6.70  -4.34c
+iter:  15 18:55:06    -5.425098c  -7.04  -4.40c
+iter:  16 18:55:08    -5.425098c  -7.36  -4.46c
+iter:  17 18:55:10    -5.425098c  -7.69c -4.66c
+
+Converged after 17 iterations.
+
+Dipole moment: (0.018491, -0.009491, -0.012008) |e|*Ang
+
+Energy contributions relative to reference atoms: (reference = -26392.251266)
+
+Kinetic:         +5.215399
+Potential:       -4.827714
+External:        +0.000000
+XC:              -5.570700
+Entropy (-ST):   +0.000000
+Local:           -0.242083
+SIC:             +0.000000
+--------------------------
+Free energy:     -5.425098
+Extrapolated:    -5.425098
+
+ Band  Eigenvalues  Occupancy
+    0    -28.01788    2.00000
+    1    -28.01420    2.00000
+    2    -28.01412    2.00000
+    3    -28.01269    2.00000
+    4    -28.01108    2.00000
+    5    -28.00879    2.00000
+    6    -28.00874    2.00000
+    7    -28.00794    2.00000
+    8    -28.00635    2.00000
+    9    -27.89525    2.00000
+   10    -27.88355    2.00000
+   11    -27.87807    2.00000
+   12    -27.87696    2.00000
+   13    -27.87653    2.00000
+   14    -27.87357    2.00000
+   15    -27.84506    2.00000
+   16    -27.84072    2.00000
+   17    -27.83583    2.00000
+   18     -4.01760    2.00000
+   19     -3.00362    2.00000
+   20     -3.00075    2.00000
+   21     -1.76371    0.00000
+   22     -1.62337    0.00000
+   23     -1.60510    0.00000
+   24     -1.41553    0.00000
+   25     -0.66307    0.00000
+   26     -0.63075    0.00000
+   27     -0.61333    0.00000
+   28     -0.55626    0.00000
+   29     -0.45032    0.00000
+
+Fermi level: -2.38223
+
+Gap: 1.237 eV
+Transition (v -> c):
+  (s=0, k=0, n=20, [0.00, 0.00, 0.00]) -> (s=0, k=0, n=21, [0.00, 0.00, 0.00])
+No difference between direct/indirect transitions
+
+Forces in eV/Ang:
+  0 Na    0.00027   -0.00008    0.00082
+  1 Na   -0.00212    0.00162   -0.00499
+  2 Na   -0.00024   -0.00080   -0.00200
+  3 Na   -0.00055   -0.00109    0.00030
+  4 Na   -0.00469    0.00350    0.00309
+  5 Na    0.00747   -0.00297    0.00273
+
+Timing:                                      incl.     excl.
+-------------------------------------------------------------------
+Density initialized from wave functions:     0.972     0.972   0.3% |
+ Symmetrize density:                         0.000     0.000   0.0% |
+Forces:                                      4.463     4.463   1.6% ||
+Hamiltonian:                                 1.611     0.030   0.0% |
+ Atomic:                                     0.112     0.002   0.0% |
+  XC Correction:                             0.110     0.110   0.0% |
+ Calculate atomic Hamiltonians:              0.644     0.644   0.2% |
+ Communicate:                                0.000     0.000   0.0% |
+ Initialize Hamiltonian:                     0.001     0.001   0.0% |
+ Poisson:                                    0.019     0.019   0.0% |
+ XC 3D grid:                                 0.805     0.805   0.3% |
+LCAO initialization:                         0.232     0.011   0.0% |
+ LCAO eigensolver:                           0.030     0.000   0.0% |
+  Calculate projections:                     0.000     0.000   0.0% |
+  DenseAtomicCorrection:                     0.000     0.000   0.0% |
+  Distribute overlap matrix:                 0.000     0.000   0.0% |
+  Orbital Layouts:                           0.002     0.002   0.0% |
+  Potential matrix:                          0.027     0.027   0.0% |
+ LCAO to grid:                               0.182     0.182   0.1% |
+ Set positions (LCAO WFS):                   0.010     0.001   0.0% |
+  Basic WFS set positions:                   0.000     0.000   0.0% |
+  Basis functions set positions:             0.000     0.000   0.0% |
+  P tci:                                     0.004     0.004   0.0% |
+  ST tci:                                    0.001     0.001   0.0% |
+  mktci:                                     0.003     0.003   0.0% |
+PWDescriptor:                                0.008     0.008   0.0% |
+Redistribute:                                0.001     0.001   0.0% |
+SCF-cycle:                                 107.929     0.027   0.0% |
+ Davidson:                                  67.582     6.124   2.2% ||
+  Apply H:                                  14.344    14.226   5.1% |-|
+   HMM T:                                    0.118     0.118   0.0% |
+  Subspace diag:                            15.351     0.003   0.0% |
+   calc_h_matrix:                           14.812     0.322   0.1% |
+    Apply H:                                14.491    14.375   5.1% |-|
+     HMM T:                                  0.115     0.115   0.0% |
+   diagonalize:                              0.015     0.015   0.0% |
+   rotate_psi:                               0.521     0.521   0.2% |
+  calc. matrices:                           30.764     2.199   0.8% |
+   Apply H:                                 28.565    28.316  10.1% |---|
+    HMM T:                                   0.249     0.249   0.1% |
+  diagonalize:                               0.093     0.093   0.0% |
+  rotate_psi:                                0.908     0.908   0.3% |
+ Density:                                   18.064     0.001   0.0% |
+  Atomic density matrices:                   0.021     0.021   0.0% |
+  Mix:                                      10.676    10.676   3.8% |-|
+  Multipole moments:                         0.005     0.005   0.0% |
+  Pseudo density:                            7.362     7.362   2.6% ||
+   Symmetrize density:                       0.000     0.000   0.0% |
+ Hamiltonian:                               22.147     0.408   0.1% |
+  Atomic:                                    1.553     0.022   0.0% |
+   XC Correction:                            1.531     1.531   0.5% |
+  Calculate atomic Hamiltonians:             9.000     9.000   3.2% ||
+  Communicate:                               0.000     0.000   0.0% |
+  Poisson:                                   0.214     0.214   0.1% |
+  XC 3D grid:                               10.972    10.972   3.9% |-|
+ Orthonormalize:                             0.108     0.000   0.0% |
+  calc_s_matrix:                             0.017     0.017   0.0% |
+  inverse-cholesky:                          0.001     0.001   0.0% |
+  projections:                               0.076     0.076   0.0% |
+  rotate_psi_s:                              0.014     0.014   0.0% |
+Set symmetry:                                0.001     0.001   0.0% |
+Other:                                     164.384   164.384  58.8% |-----------------------|
+-------------------------------------------------------------------
+Total:                                               279.602 100.0%
+
+Memory usage: 1.54 GiB
+Date: Sun Feb 16 18:57:54 2025
