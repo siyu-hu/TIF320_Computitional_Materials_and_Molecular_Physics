@@ -3,24 +3,27 @@ from ase.io import read, write
 from gpaw import GPAW, PW
 from ase.optimize import BFGS
 
-# Read the two structures from task7
-#struct1 = read('task7_lowest_energy_structure.xyz')
-#struct2 = read('task7_second_lowest_energy_structure.xyz')
-
 # Read standard structures
-struct1 = read('../standard_christmas_tree.xyz')
-struct2 = read('../standard_half_decahedron.xyz')
+struct1 = read('standard_christmas_tree.xyz')
+struct2 = read('standard_half_decahedron.xyz')
 
 # Define at least 6 different parameter sets
 parameter_sets = [
-    #{"mode": PW(350), "xc": "PBE"},          # Standard PW
-    #{"mode": PW(400), "xc": "PBE"},          # Higher cutoff PW
+    {"mode": PW(350), "xc": "PBE"},          # Standard PW
+    #{"mode": PW(400), "xc": "PBE"},   
+    #{"mode": PW(500), "xc": "PBE"},        # Higher cutoff PW
     #{"mode": 'fd', "h": 0.2, "xc": "PBE"},   # Standard fd
     #{"mode": 'fd', "h": 0.15, "xc": "PBE"},  # Finer grid fd
     #{"mode": PW(350), "xc": "LDA"}  
-    {"mode": PW(400), "xc": "LDA"}
-   # {"mode": 'lcao', "basis": "dzp", "xc": "PBE"},  # Double-zeta polarized
-   # {"mode": 'lcao', "basis": "dzp", "xc": "LDA"}   # Different functional
+    #{"mode": PW(400), "xc": "LDA"}
+    #{"mode": 'lcao', "basis": "dzp", "xc": "PBE"},  # Double-zeta polarized
+    # {"mode": 'lcao', "basis": "dzp", "xc": "LDA"}   
+    #{"mode": 'lcao', "basis": "tzp", "xc": "PBE"},
+    #{"mode": 'lcao', "basis": "qzp", "xc": "PBE"},
+    #{"mode": PW(400), "xc": "HSE06"},
+    #{"mode": PW(400), "xc": "PBE0"},
+    #{"mode": PW(400), "xc": "SCAN"},
+
 ]
 
 results = []
@@ -36,9 +39,13 @@ for struct_id, structure in enumerate([struct1, struct2], 1):
             mode=mode, 
             #h=params["h"],
             xc=params["xc"],
-            txt=f'task8_struct{struct_id}_calc_{i+1}.txt'
+            #nbands=-10, 
+            #kpts=(1, 1, 1),
+            txt=f'task8_struct{struct_id}_calc_{i+1}.txt',
+            #parallel={'domain': 1}
         )
-        structure.set_calculator(calc)
+        #structure.set_calculator(calc)
+        structure.calc = calc
         opt = BFGS(structure)
         opt.run(fmax=0.01)
         energy = structure.get_potential_energy()
