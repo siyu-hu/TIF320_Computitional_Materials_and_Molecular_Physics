@@ -86,47 +86,13 @@ phonon.run_band_structure(
 #     print("Warning: Imaginary frequencies detected!")
 # else:
 #     print("Phonon spectrum is dynamically stable.")
-
-
-band_dict = phonon.get_band_structure_dict()
-frequencies = band_dict['frequencies']  
-qpoints = band_dict['qpoints'] 
-labels = band_dict['labels']  
-
-
-fig, ax = plt.subplots(figsize=(8, 6))
-
-# 绘制声子谱
-for i in range(frequencies.shape[1]):  # 遍历所有声子支
-    ax.plot(qpoints, frequencies[:, i], color='blue', linewidth=1.5, label="Acoustic Branches" if i == 0 else "")
-
-# 添加标题
-ax.set_title("Phonon Band Structure of BCC Sodium", fontsize=14, pad=20)
-
-# 添加坐标轴标签
-ax.set_xlabel("Wave Vector", fontsize=12)
-ax.set_ylabel("Frequency (THz)", fontsize=12)  # 明确频率单位
-
-# 添加高对称点标签
-ax.set_xticks([qpoints[i] for i in range(0, len(qpoints), len(qpoints)//4)])  # 根据路径段数设置
-ax.set_xticklabels(labels, rotation=45, fontsize=10)
-
-# 添加图例
-ax.legend(loc="upper right", fontsize=10)
-
-# 添加网格线和零频参考线
-ax.axhline(0, color='gray', linestyle='--', linewidth=0.8, alpha=0.7)
-ax.grid(axis='y', linestyle=':', alpha=0.5, color='lightgray')
-
-# 保存图像
-fig.savefig(
-    './A3/task4_Na_phonon_bandstructure_simple.png',
-    dpi=300,  # 高分辨率
-    bbox_inches='tight'  # 防止边缘被裁剪
-)
+fig = phonon.plot_band_structure()
+ax = fig.gca()
+ax.axhline(0, color='gray', linestyle='--', alpha=0.5)
+fig.savefig('./A3/task4_Na_phonon_bandstructure.png', dpi=300)
 
 # 完成
 total_time = time.time() - start_time
 print(f"\n=== Calculation Completed ===")
 print(f"Total time: {total_time//60:.0f} min {total_time%60:.1f} sec")
-print(f"Results saved to: ./A3/task4_Na_phonon_bandstructure_simple.png")
+print(f"Results saved to: ./A3/task4_Na_phonon_bandstructure.png")
