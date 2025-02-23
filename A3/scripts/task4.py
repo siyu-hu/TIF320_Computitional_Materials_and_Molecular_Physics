@@ -15,9 +15,9 @@ na = bulk('Na', 'bcc', a=4.1932)
 print("[1/6] Original BCC unit cell created (2 atoms).")
 
 calc = GPAW(
-    mode=PW(300),
+    mode=PW(600),
     xc='PBE',
-    kpts=(4, 4, 4),
+    kpts=(8, 8, 8),
     random=True,
     setups={'Na': '1'},
     symmetry='off',  
@@ -91,7 +91,6 @@ ax = fig.gca()
 ax.axhline(0, color='gray', linestyle='--', alpha=0.5)
 fig.savefig('./A3/task4_Na_phonon_bandstructure.png', dpi=300)
 
-# 完成
 total_time = time.time() - start_time
 print(f"\n=== Calculation Completed ===")
 print(f"Total time: {total_time//60:.0f} min {total_time%60:.1f} sec")
