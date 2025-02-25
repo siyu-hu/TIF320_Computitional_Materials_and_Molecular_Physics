@@ -1,33 +1,23 @@
 # Import necessary modules from ASE
+import os
 from ase.build import bulk, surface
 from ase.visualize import view
 
-# Generate bulk sodium (Na) structure with bcc lattice
-# Parameters:
-#   'Na': Element symbol
-#   'bcc': Crystal structure (body-centered cubic)
-#   a=4.23: Lattice constant in Angstroms (experimental value for Na)
-#   cubic=True: Force cubic unit cell
-na_bulk = bulk('Na', 'bcc', a=4.23, cubic=True)
+os.makedirs("A3", exist_ok=True)
 
-# Create (100) surface slab
-# surface() parameters:
-#   na_bulk: Bulk structure template
-#   (1,0,0): Miller indices for (100) surface
-#   layers=5: Number of atomic layers
-na_100 = surface(na_bulk, (1, 0, 0), layers=5)
-# Add 10 Angstrom vacuum layer along z-axis (axis=2)
-na_100.center(vacuum=10, axis=2)
+na_bulk = bulk('Na', 'bcc', a=4.1932, cubic=True)
 
-# Create (111) surface slab
-na_111 = surface(na_bulk, (1, 1, 1), layers=5)
-na_111.center(vacuum=10, axis=2)
+surfaces = {
+    "100": (1, 0, 0, 10),
+    "110": (1, 1, 0, 11),
+    "111": (1, 1, 1, 11),
+}
 
-# Create (110) surface slab
-na_110 = surface(na_bulk, (1, 1, 0), layers=5)
-na_110.center(vacuum=10, axis=2)
+for name, (h, k, l, layers) in surfaces.items():
+    slab = surface(na_bulk, (h, k, l), layers=layers)
+    slab.center(vacuum=25, axis=2)  # add vacuum to the top and bottom of the slab
+    filename = f"A3/task5_Na_{name}.cif"
+    slab.write(filename) 
+    print(f"Saved {filename}")
 
-# Save structures to CIF files (optional)
-na_100.write('./A3/task5_Na_100.cif')
-na_111.write('./A3/task5_Na_111.cif')
-na_110.write('./A3/task5_Na_110.cif')
+
