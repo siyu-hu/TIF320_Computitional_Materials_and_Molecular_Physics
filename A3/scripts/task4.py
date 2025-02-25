@@ -15,9 +15,9 @@ na = bulk('Na', 'bcc', a=4.1932)
 print("[1/6] Original BCC unit cell created (2 atoms).")
 
 calc = GPAW(
-    mode=PW(600),
+    mode=PW(300),
     xc='PBE',
-    kpts=(8, 8, 8),
+    kpts=(4, 4, 4),
     random=True,
     setups={'Na': '1'},
     symmetry='off',  
@@ -88,10 +88,17 @@ phonon.run_band_structure(
 #     print("Phonon spectrum is dynamically stable.")
 fig = phonon.plot_band_structure()
 ax = fig.gca()
-ax.axhline(0, color='gray', linestyle='--', alpha=0.5)
-fig.savefig('./A3/task4_Na_phonon_bandstructure.png', dpi=300)
+ax.set_title("Phonon Band Structure of BCC Sodium", fontsize=14, pad=15)
+ax.set_xlabel("Wave Vector", fontsize=12)
+ax.set_ylabel("Frequency (THz)", fontsize=12)
+ax.tick_params(axis="both", labelsize=10)
+ax.grid(axis="y", linestyle=":", alpha=0.5, color="gray")
 
-total_time = time.time() - start_time
-print(f"\n=== Calculation Completed ===")
-print(f"Total time: {total_time//60:.0f} min {total_time%60:.1f} sec")
-print(f"Results saved to: ./A3/task4_Na_phonon_bandstructure.png")
+plt.tight_layout()
+
+fig.savefig(
+    "./A3/task4_Na_phonon_bandstructure_pro.png",
+    dpi=300,
+    bbox_inches="tight",
+    facecolor="white"
+)
