@@ -15,9 +15,9 @@ na = bulk('Na', 'bcc', a=4.1932)
 print("[1/6] Original BCC unit cell created (2 atoms).")
 
 calc = GPAW(
-    mode=PW(300),
+    mode=PW(500),
     xc='PBE',
-    kpts=(4, 4, 4),
+    kpts=(8, 8, 8),
     random=True,
     setups={'Na': '1'},
     symmetry='off',  
