@@ -4,19 +4,11 @@ from ase.build import bulk, surface
 from ase.optimize import BFGS
 import numpy as np
 import os
-from mpi4py import MPI
 import pandas as pd
 
-comm = MPI.COMM_WORLD
-rank = comm.Get_rank()
-size = comm.Get_size()
-
-
 script_dir = os.path.dirname(os.path.abspath(__file__))
-result_dir = os.path.join(script_dir, 'result')
-if rank == 0:
-    os.makedirs(result_dir, exist_ok=True)
-
+result_dir = os.path.join(script_dir,'result')
+os.makedirs(result_dir, exist_ok=True)
 
 CONVERGENCE_THRESHOLD = 0.01  # J/m²
 
@@ -32,22 +24,17 @@ calc_bulk = GPAW(
 
 Na_bulk.calc = calc_bulk
 # calculate bulk energy
-
 E_bulk = Na_bulk.get_potential_energy() / len(Na_bulk)
 
-facets = [(1, 0, 0), (1, 1, 0)] #facets = [(1, 0, 0), (1, 1, 0), (1, 1, 1)]
-layers_list = [3] #layers_list = [10, 12, 14, 16, 18]
-vacuum_list = [5, 8] #vacuum_list = [15, 20, 25, 30, 35]
-
+facets = [(1, 0, 0), (1, 1, 0)] 
+layers_list = [3] 
+vacuum_list = [5, 8] 
 
 tasks = [(facet, layers, vacuum) for facet in facets for layers in layers_list for vacuum in vacuum_list]
-# Scatter tasks to all ranks
-my_tasks = tasks[rank::size]
-print(f"Rank {rank} has {len(my_tasks)} tasks")
 
 local_results = []
-for facet, layers, vacuum in my_tasks:
-    print(f"Rank {rank}: Calculating for {facet} with layers={layers}, vacuum={vacuum} Å")
+for facet, layers, vacuum in tasks:
+    print(f"Calculating for {facet} with layers={layers}, vacuum={vacuum} Å")
 
     slab = surface(Na_bulk, facet, layers=layers)
     slab.center(vacuum=vacuum, axis=2)
@@ -66,8 +53,7 @@ for facet, layers, vacuum in my_tasks:
     try:
         relax.run(fmax=0.01)
     except Exception as e:
-        print(f"Rank {rank}: Error relaxing slab {facet} with {layers} layers, {vacuum} Å vacuum: {e}")
-        
+        print(f"Error relaxing slab {facet} with {layers} layers, {vacuum} Å vacuum: {e}")
         continue
 
     # calculate surface energy
@@ -84,10 +70,6 @@ for facet, layers, vacuum in my_tasks:
         'surface_energy': gamma,
     })
 
-all_results = comm.gather(local_results, root=0)
-
-if rank == 0:
-    all_results_flat = [item for sublist in all_results for item in sublist]
-    df = pd.DataFrame(all_results_flat)
-    print(df)
-    df.to_csv(os.path.join(result_dir, 'surface_energy_results.csv'), index=False)
+df = pd.DataFrame(local_results)
+print(df)
+df.to_csv(os.path.join(result_dir,'surface_energy_results.csv'), index=False)
