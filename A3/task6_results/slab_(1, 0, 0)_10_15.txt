@@ -1,0 +1,247 @@
+
+  ___ ___ ___ _ _ _  
+ |   |   |_  | | | | 
+ | | | | | . | | | | 
+ |__ |  _|___|_____|  24.1.0
+ |___|_|             
+
+User:   husi@vera-r04-21
+Date:   Wed Feb 26 19:17:03 2025
+Arch:   x86_64
+Pid:    3104615
+CWD:    /cephyr/users/husi/Vera/A3
+Python: 3.11.3
+gpaw:   /apps/Arch/software/GPAW/24.1.0-foss-2023a/lib/python3.11/site-packages/gpaw
+_gpaw:  /apps/Arch/software/GPAW/24.1.0-foss-2023a/lib/python3.11/site-packages/
+        _gpaw.cpython-311-x86_64-linux-gnu.so
+ase:    /apps/Arch/software/ASE/3.22.1-gfbf-2023a/lib/python3.11/site-packages/ase (version 3.22.1)
+numpy:  /apps/Arch/software/SciPy-bundle/2023.07-gfbf-2023a/lib/python3.11/site-packages/numpy (version 1.25.1)
+scipy:  /apps/Arch/software/SciPy-bundle/2023.07-gfbf-2023a/lib/python3.11/site-packages/scipy (version 1.11.1)
+libxc:  6.2.2
+units:  Angstrom and eV
+cores: 32
+OpenMP: False
+OMP_NUM_THREADS: 1
+
+Input parameters:
+  kpts: [8 8 1]
+  mode: {ecut: 500.0,
+         name: pw}
+  occupations: {fixmagmom: False,
+                name: fermi-dirac,
+                width: 0.01}
+  xc: PBE
+
+System changes: positions, numbers, cell, pbc, initial_charges, initial_magmoms 
+
+Initialize ...
+
+species:
+  Na:
+    name: Sodium
+    id: d7ecbc49209718622bcbe287195dca2a
+    Z: 11.0
+    valence: 7
+    core: 4
+    charge: 0.0
+    file: /apps/Common/software/GPAW-setups/24.1.0/Na.PBE.gz
+    compensation charges: {type: gauss,
+                           rc: 0.37,
+                           lmax: 2}
+    cutoffs: {filter: 2.17,
+              core: 2.59}
+    valence states:
+      #              energy  rcut
+      - 3s(1.00)    -2.744   1.201
+      - 2p(6.00)   -28.672   1.217
+      - 3p(0.00)    -0.743   1.217
+      -  s          24.468   1.201
+      -  d           0.000   1.238
+  
+    # Using partial waves for Na as LCAO basis
+
+Reference energy: -44186.104977  # eV
+
+Spin-paired calculation
+
+Convergence criteria:
+ Maximum [total energy] change in last 3 cyles: 0.0005 eV / valence electron
+ Maximum integral of absolute [dens]ity change: 0.0001 electrons / valence electron
+ Maximum integral of absolute [eigenst]ate change: 4e-08 eV^2 / valence electron
+ Maximum number of scf [iter]ations: 333
+ (Square brackets indicate name in SCF output, whereas a 'c' in
+ the SCF output indicates the quantity has converged.)
+
+Symmetries present (total): 4
+
+  ( 1  0  0)  ( 0  1  0)  ( 0 -1  0)  (-1  0  0)
+  ( 0  1  0)  ( 1  0  0)  (-1  0  0)  ( 0 -1  0)
+  ( 0  0  1)  ( 0  0  1)  ( 0  0  1)  ( 0  0  1)
+
+64 k-points: 8 x 8 x 1 Monkhorst-Pack grid
+20 k-points in the irreducible part of the Brillouin zone
+       k-points in crystal coordinates                weights
+   0:     0.06250000   -0.06250000    0.00000000          2/64
+   1:     0.06250000    0.06250000    0.00000000          2/64
+   2:     0.18750000   -0.18750000    0.00000000          2/64
+   3:     0.18750000   -0.06250000    0.00000000          4/64
+   4:     0.18750000    0.06250000    0.00000000          4/64
+   5:     0.18750000    0.18750000    0.00000000          2/64
+   6:     0.31250000   -0.31250000    0.00000000          2/64
+   7:     0.31250000   -0.18750000    0.00000000          4/64
+   8:     0.31250000   -0.06250000    0.00000000          4/64
+   9:     0.31250000    0.06250000    0.00000000          4/64
+          ...
+  19:     0.43750000    0.43750000    0.00000000          2/64
+
+Wave functions: Plane wave expansion
+  Cutoff energy: 500.000 eV
+  Number of coefficients (min, max): 17794, 18011
+  Pulay-stress correction: 0.000000 eV/Ang^3 (de/decut=0.000000)
+  Using FFTW library
+  ScaLapack parameters: grid=1x1, blocksize=None
+  Wavefunction extrapolation:
+    Improved wavefunction reuse through dual PAW basis 
+
+Occupation numbers: Fermi-Dirac:
+  width: 0.0100  # eV
+ 
+
+Eigensolver
+   Davidson(niter=2) 
+
+Densities:
+  Coarse grid: 20*20*294 grid
+  Fine grid: 40*40*588 grid
+  Total Charge: 0.000000 
+
+Density mixing:
+  Method: separate
+  Backend: pulay
+  Linear mixing parameter: 0.05
+  old densities: 5
+  Damping of long wavelength oscillations: 50 
+
+Hamiltonian:
+  XC and Coulomb potentials evaluated on a 40*40*588 grid
+  Using the PBE Exchange-Correlation functional
+  External potential:
+    NoExternalPotential
+ 
+
+XC parameters: PBE with 2 nearest neighbor stencil
+
+Memory estimate:
+  Process memory now: 231.91 MiB
+  Calculator: 92.33 MiB
+    Density: 51.23 MiB
+      Arrays: 23.33 MiB
+      Localized functions: 18.93 MiB
+      Mixer: 8.97 MiB
+    Hamiltonian: 15.64 MiB
+      Arrays: 15.25 MiB
+      XC: 0.00 MiB
+      Poisson: 0.00 MiB
+      vbar: 0.39 MiB
+    Wavefunctions: 25.46 MiB
+      Arrays psit_nG: 8.24 MiB
+      Eigensolver: 1.70 MiB
+      Projections: 0.06 MiB
+      Projectors: 9.60 MiB
+      PW-descriptor: 5.86 MiB
+
+Total number of cores used: 32
+Parallelization over k-points: 4
+Parallelization over states: 8
+
+Number of atoms: 10
+Number of atomic orbitals: 70
+Number of bands in calculation: 46
+Number of valence electrons: 70
+Bands to converge: occupied
+
+... initialized
+
+Initializing position-dependent things.
+
+Density initialized from atomic densities
+Creating initial wave functions:
+  46 bands from LCAO basis set
+
+                     
+                     
+                     
+                     
+            Na       
+                     
+                     
+                     
+                     
+       Na            
+                     
+            Na       
+                     
+                     
+                     
+                     
+       Na            
+                     
+                     
+            Na       
+                     
+                     
+                     
+       Na            
+                     
+                     
+            Na       
+                     
+                     
+                     
+                     
+       Na            
+                     
+            Na       
+                     
+                     
+                     
+                     
+       Na            
+                     
+                     
+                     
+                     
+
+Positions:
+   0 Na     0.000000    0.000000   15.000000    ( 0.0000,  0.0000,  0.0000)
+   1 Na     1.210473    1.711867   17.965040    ( 0.0000,  0.0000,  0.0000)
+   2 Na    -0.000000    0.000000   20.930080    ( 0.0000,  0.0000,  0.0000)
+   3 Na     1.210473    1.711867   23.895120    ( 0.0000,  0.0000,  0.0000)
+   4 Na    -0.000000    0.000000   26.860161    ( 0.0000,  0.0000,  0.0000)
+   5 Na     1.210473    1.711867   29.825201    ( 0.0000,  0.0000,  0.0000)
+   6 Na     0.000000    0.000000   32.790241    ( 0.0000,  0.0000,  0.0000)
+   7 Na     1.210473    1.711867   35.755281    ( 0.0000,  0.0000,  0.0000)
+   8 Na    -0.000000    0.000000   38.720321    ( 0.0000,  0.0000,  0.0000)
+   9 Na     1.210473    1.711867   41.685361    ( 0.0000,  0.0000,  0.0000)
+
+Unit cell:
+           periodic     x           y           z      points  spacing
+  1. axis:    yes    3.631418    0.000000    0.000000    20     0.1712
+  2. axis:    yes   -1.210473    3.423733    0.000000    20     0.1712
+  3. axis:    no     0.000000   -0.000000   56.685361   294     0.1928
+
+  Lengths:   3.631418   3.631418  56.685361
+  Angles:   90.000000  90.000000 109.471221
+
+Effective grid spacing dv^(1/3) = 0.1816
+
+     iter     time        total  log10-change:
+                         energy   eigst   dens
+iter:   1 19:17:07   -13.023257
+iter:   2 19:17:08   -13.037238   -1.41  -1.61
+iter:   3 19:17:10   -13.021855c  -2.19  -1.67
+iter:   4 19:17:11   -12.971451   -2.57  -1.66
+iter:   5 19:17:12   -12.972353   -2.84  -1.85
+iter:   6 19:17:13   -12.972657c  -3.21  -1.98
+iter:   7 19:17:14   -12.962217c  -3.54  -2.14
+iter:   8 19:17:16   -12.955939c  -4.06  -2.42

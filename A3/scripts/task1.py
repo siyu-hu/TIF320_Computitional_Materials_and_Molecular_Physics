@@ -64,8 +64,8 @@ plt.tight_layout()
 plt.savefig('./A3/task1_Na_convergence.png')
 
 
-final_kpts = (6, 6, 6)  
-final_ecut = 500         
+final_kpts = (8, 8, 8)  
+final_ecut = 600         
 
 calc = GPAW(
     mode=PW(final_ecut),

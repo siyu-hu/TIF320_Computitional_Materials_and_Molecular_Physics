@@ -14,7 +14,7 @@ for a in a_values:
         mode=PW(500),        # from task 1
         xc='PBE',
         setups={'Na': '1'},  #  3s¹ 
-        kpts=(8, 8, 8),      # from task 1
+        kpts=(8, 8, 1),      # from task 1
         txt=f'./A3/task2_Na_a_{a:.2f}.out'
     )
     
