@@ -2,178 +2,124 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+alpha  = np.array([0.297104, 1.236745, 5.749982, 38.216677])
 
-def wavefunction_anzats(r, C, alpha):    
-    result = np.zeros_like(r)
+# Create Hamiltonian matrix
+n = len(alpha)
+h = np.zeros((n, n))
+for p in range(n):
+    for q in range(n):
+        alpha_sum = alpha[p] + alpha[q]
+        h[p][q] = 3 * np.pi * alpha[q] * np.sqrt(np.pi / alpha_sum**3) - \
+                    3 * np.pi * alpha[q]**2 * np.sqrt(np.pi / alpha_sum**5) - \
+                    4 * np.pi / alpha_sum
 
-    for p in range(0, len(C)):  #sum of four gaussians
-        result += C[p] * np.exp( - alpha[p] * r**2 )
-    
-    return result
+# Create overlap matrix
+S = np.zeros((n, n))
+for p in range(n):
+    for q in range(n):
+        S[p][q] = (np.pi / (alpha[p] + alpha[q]))**1.5
 
+# Create Coulomb integral tensor
+Q = np.zeros((n, n, n, n))
+for p in range(n):
+    for r in range(n):
+        for q in range(n):
+            for s in range(n):
+                Q[p][r][q][s] = 2 * np.pi**2.5 / (
+                    (alpha[p] + alpha[q]) * (alpha[r] + alpha[s]) *
+                    np.sqrt(alpha[p] + alpha[q] + alpha[r] + alpha[s])
+                )
 
-def normalize_coefficients(C, S):
-    n = len(C)
-    norm2 = 0
-    for p in range(0, n):
-        for q in range(0, n):
-            norm2 += C[p] * S[p][q] * C[q]
-    
-    return C / np.sqrt(norm2)
+# Pick initial value:
+C = np.array([1, 1, 1, 1], dtype=np.float64)  # Ensure C is a float array
 
+# Normalize coefficients using the overlap matrix
+norm2 = 0
+for p in range(n):
+    for q in range(n):
+        norm2 += C[p] * S[p][q] * C[q]
+C /= np.sqrt(norm2)
 
-def create_h_matrix(alpha):
-    n = len(alpha)
-    h = np.zeros((n, n))
+# Compute initial energy
+energy = 0
+for p in range(n):
+    for q in range(n):
+        energy += 2 * C[p] * C[q] * h[p][q]
+        for r in range(n):
+            for s in range(n):
+                energy += Q[p][r][q][s] * C[p] * C[q] * C[r] * C[s]
+old_energy = energy
 
-    for p in range(0, n):
-        for q in range(0, n):
-
-            alpha_sum = alpha[p]+alpha[q]
-            h[p][q] = \
-                3 * np.pi * alpha[q]    * np.sqrt(np.pi / alpha_sum**3) - \
-                3 * np.pi * alpha[q]**2 * np.sqrt(np.pi / alpha_sum**5) - \
-                4 * np.pi / alpha_sum
-    
-    return h
-                
-
-def create_S_matrix(alpha):
-    n = len(alpha)
-    S = np.zeros((n, n))
-
-    for p in range(0, n):
-        for q in range(0, n):
-
-            S[p][q] = (np.pi / (alpha[p] + alpha[q]))**1.5
-
-    return S
-
-
-def create_Q_tensor(alpha):
-    n = len(alpha)
-    Q = np.zeros((n,n,n,n))
-
-    for p in range(0, n):
-        for r in range(0, n):
-            for q in range(0, n):
-                for s in range(0, n):
-
-                    Q[p][r][q][s] = 2 * np.pi**2.5 / (
-                        (alpha[p] + alpha[q]) * (alpha[r] + alpha[s]) *
-                        np.sqrt(alpha[p] + alpha[q] + alpha[r] + alpha[s])
-                    )
-
-    return Q
-
-
-def create_F_matrix(C, h, Q):
-    n = len(C)
+# Iterate to find self-consistent solution
+for i in range(1000):
+    # Create Fock matrix
     F = np.zeros((n, n))
-
-    for p in range(0, n):
-        for q in range(0, n):
-
+    for p in range(n):
+        for q in range(n):
             F[p][q] = h[p][q]
-
-            for r in range(0, n):
-                for s in range(0, n):
-
+            for r in range(n):
+                for s in range(n):
                     F[p][q] += Q[p][r][q][s] * C[r] * C[s]
 
-    return F
-
-
-def compute_energy(C, h, Q):
-    n = len(C)
-    E = 0
-    for p in range(0, n):
-        for q in range(0, n):
-
-            E += 2 * C[p] * C[q] * h[p][q]
-
-            for r in range(0, n):
-                for s in range(0, n):
-
-                    E += Q[p][r][q][s] * C[p] * C[q] * C[r] * C[s]
-
-    return E
-
-def solve_generalized_eigenvalue_problem(F, S):
-    
-    # Diagonalize S
+    # Diagonalize overlap matrix to solve the generalized eigenvalue problem
     d, U = np.linalg.eigh(S)
-
-    # Avoid divide-by-zero issues
     d[d < 1e-12] = 1e-12
-
-    # V will have the property V.T @ S @ V = I
     V = U @ np.diag(1 / np.sqrt(d))
 
-    # Solve transformed eigenvalue problem
+    # Transform Fock matrix to new basis
     F_prime = V.T @ (F @ V)
-    Eprime, Cprime = np.linalg.eigh(F_prime)  # Use eigh for sorting
+    Eprime, Cprime = np.linalg.eigh(F_prime)
 
-    # Recover original eigenvectors
-    C = V @ Cprime[:, 0]  # Take the first eigenvector (smallest eigenvalue)
+    # Transform back to original basis
+    C = V @ Cprime[:, 0]
 
-    return Eprime[0], C
+    # Normalize coefficients again
+    norm2 = 0
+    for p in range(n):
+        for q in range(n):
+            norm2 += C[p] * S[p][q] * C[q]
+    C /= np.sqrt(norm2)
 
+    # Compute new energy
+    energy = 0
+    for p in range(n):
+        for q in range(n):
+            energy += 2 * C[p] * C[q] * h[p][q]
+            for r in range(n):
+                for s in range(n):
+                    energy += Q[p][r][q][s] * C[p] * C[q] * C[r] * C[s]
 
-if __name__ == "__main__":
-    alpha  = np.array([0.297104, 1.236745, 5.749982, 38.216677])
+    # convergence criterion
+    if (27.2114 * abs(energy - old_energy) < 1e-5):
+        break
 
-    h = create_h_matrix(alpha)
-    S = create_S_matrix(alpha)
-    Q = create_Q_tensor(alpha)
+    old_energy = energy
 
+print(f"Ground state energy: {energy:.7f} [Ha](ideally, it should be -2.8551716[Ha])")
+print(f"C-parameters: {C}")
 
-    # Pick initial value:
-    C = np.array([1, 1, 1, 1])
-    C = normalize_coefficients(C, S)
-    E = compute_energy(C, h, Q)
-    old_E = E
+# Compute and save wavefunction
+N = 1000
+r_lin = np.linspace(0, 5, N)
+phi = np.abs(np.zeros_like(r_lin))
 
-    # Iterate to find self-consistent solution
-    for i in range(0, 1000):
-        F = create_F_matrix(C, h, Q)
-        Eprime, C = solve_generalized_eigenvalue_problem(F, S)
-        C = normalize_coefficients(C, S)
-        
-        old_E = E
-        E = compute_energy(C, h, Q)
+for p in range(n):
+    phi += C[p] * np.exp(-alpha[p] * r_lin**2)
 
-        # Break if energy step is less than 10^-5 eV
-        if (27.211 * abs(E - old_E) < 1e-5): break
+# Save alpha parameters and C-parameters, with clear titles and alignment
+with open('./A5/task1_helium_wavefunction.txt', 'w') as file:
+    file.write("---- Calculated C-parameters for the helium ground state wavefunction ----\n")
+    file.write("This file contains the C-parameters for the helium wavefunction based on four Gaussians as a basis, each on the form: C * exp(-alpha * r^2)\n\n")
+    
+    file.write("---- Alpha Parameters ----\n")
+    for i in range(n):
+        file.write(f"alpha[{i}] = {alpha[i]:.6f}\n") 
 
-
-    print(f"Ground state energy: {E:.7f} [Ha](should be -2.8551716[Ha])")
-    print(f"C-parameters: {C}")
-
-    N = 1000
-    r_lin = np.linspace(0, 5, N)
-    phi = np.abs(wavefunction_anzats(r_lin, C, alpha))
-   
-    with open(f'./A5/task1_helium_wavefunction_4gaussians_as_basis_N={N}.csv', 'w') as file: 
-        file.write("Radial distance r (atomic units),Calculated helium wavefunction (probability amplitude)\n")
-        for i in range(len(r_lin)):
-            file.write(f"{r_lin[i]},{phi[i]}\n")
-
-
-    with open('./A5/task1_helium_wavefunction_alpha_and_C-parameters.txt','w') as file:
-        file.write(f"Calculated C-parameters from ground state wavefunction of helium with four gassians as a basis, each on the form: C * exp( - alpha * r^2 )\n")
-        file.write(f"alpha[0]: {alpha[0]}\n")
-        file.write(f"alpha[1]: {alpha[1]}\n")
-        file.write(f"alpha[2]: {alpha[2]}\n")
-        file.write(f"alpha[3]: {alpha[3]}\n")
-        file.write(f"C[0]: {C[0]}\n")
-        file.write(f"C[1]: {C[1]}\n")
-        file.write(f"C[2]: {C[2]}\n")
-        file.write(f"C[3]: {C[3]}\n")
-        file.write(f"Number of points in discretized radial coordinate: {N}\n")
-        file.write(f"Ground state energy of helium: {E:.7f} (a.u.)")
-
-    plt.plot(r_lin, phi)
-    plt.xlabel("Radial distance from nucleus (a.u.)")
-    plt.ylabel("Wavefunction")
-    plt.savefig('./A5/task1_helium_wavefunction_4gaussians_as_basis.png')
+    file.write("\n---- C Parameters (Coefficients) ----\n")
+    for i in range(n):
+        file.write(f"C[{i}] = {C[i]:.6f}\n")
+    
+    file.write("\n----  RESULTS ----\n")
+    file.write(f"Number of points in discretized radial coordinate: {N}\n")
+    file.write(f"Ground state energy of Helium : {energy:.7f} [Ha]\n" )  

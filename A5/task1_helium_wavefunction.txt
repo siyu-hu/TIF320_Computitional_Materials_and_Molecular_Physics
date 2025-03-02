@@ -1,0 +1,18 @@
+---- Calculated C-parameters for the helium ground state wavefunction ----
+This file contains the C-parameters for the helium wavefunction based on four Gaussians as a basis, each on the form: C * exp(-alpha * r^2)
+
+---- Alpha Parameters ----
+alpha[0] = 0.297104
+alpha[1] = 1.236745
+alpha[2] = 5.749982
+alpha[3] = 38.216677
+
+---- C Parameters (Coefficients) ----
+C[0] = -0.146876
+C[1] = -0.393152
+C[2] = -0.411198
+C[3] = -0.262007
+
+----  RESULTS ----
+Number of points in discretized radial coordinate: 1000
+Ground state energy of Helium : -2.8551604 [Ha]
