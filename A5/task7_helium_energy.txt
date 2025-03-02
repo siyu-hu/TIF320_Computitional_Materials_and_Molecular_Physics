@@ -1,0 +1,5 @@
+Calculated ground state energy of helium: -2.83171429 [a.u.]
+Number of points in discretized radial coordinate: 6000 
+Exchange included: True
+Correlation included: True
+Wavefunction's total probability: 1.000000 (normalized if 1)
