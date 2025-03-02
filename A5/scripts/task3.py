@@ -9,7 +9,6 @@ def create_matrix_D2_finite_difference(N, h):
     Parameters:
         N (int): Number of grid points.
         h (float): Grid spacing.
-    
     Returns:
         D2 (numpy array): Matrix for the second derivative.
     """
@@ -30,7 +29,6 @@ def normalize_radial_wavefunction(psi, r):
     Parameters:
         psi (numpy array): The radial wavefunction.
         r (numpy array): The radial grid.
-    
     Returns:
         normalized_psi (numpy array): The normalized radial wavefunction.
     """
@@ -44,7 +42,6 @@ def total_probability_of_radial_wavefunction(psi, r):
     Parameters:
         psi (numpy array): The radial wavefunction.
         r (numpy array): The radial grid.
-    
     Returns:
         probability (float): The total probability, which should be 1 for a normalized wavefunction.
     """
@@ -106,7 +103,7 @@ def solve_kohn_sham(r, potential):
     return eps, u
 
 # Define the radial grid (excluding r=0 to avoid singularity)
-N = 100
+N = 1000 
 linspace_start, linspace_end = 0, 10
 r = np.linspace(linspace_start, linspace_end, N+1)[1:]
 h = r[1] - r[0]
@@ -159,12 +156,6 @@ plt.legend()
 plt.savefig(f'./A5/task3_hydrogen_wavefunction_N={N}.png')
 
 # Save data to CSV for further analysis or plotting
-output_path_wavefunction = f'./A5/task3_hydrogen_wavefunction_N={N}.csv'  
-with open(output_path_wavefunction, 'w') as CSV_file:
-    CSV_file.write(f"Radial distance r [a.u], theoretical hydrogen ground state wavefunction , calculated hydrogen ground state wavefunction with {N} points\n")
-    for line in range(N):
-        CSV_file.write(f"{r[line]}, {psi_hydrogen_theoretical[line]}, {psi_hydrogen[line]}\n")
-
 output_path_energy = f'./A5/task3_hydrogen_energy_N={N}.txt'  
 with open(output_path_energy, 'w') as file:
     file.write(f"Calculated ground state energy of hydrogen: {E_hydrogen:.7f} [a.u]\n")
