@@ -3,7 +3,21 @@ import matplotlib.pyplot as plt
 from scipy.integrate import trapezoid
 from task2 import solve_poisson
 from task3 import solve_kohn_sham
+import csv
 
+def save_to_csv(filename, r, psi):
+    with open(filename, 'w', newline='') as csvfile:
+        fieldnames = ['Radial Distance r (a.u.)', 'Computed Wavefunction']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+        writer.writeheader()
+
+        for i in range(len(r)):
+            writer.writerow({
+                'Radial Distance r (a.u.)': r[i],
+                'Computed Wavefunction': psi[i],
+            })
+        
 def wavefunction_anzats(r):
     # constants from taks 1
     alpha  = np.array([0.297104, 1.236745, 5.749982, 38.216677])
@@ -137,6 +151,7 @@ include_correlation = True
 # plt.show()
 a0 = 1
 E, r, psi, energy_list = find_scf_wavefunction(30, 6000, include_exchange, include_correlation)
+save_to_csv(f'./A5/task{task}_helium_wavefunction_and_energy.csv', r, psi)
 
 # Theoretical Hydrogen atom wavefunction  for comparison
 psi_theoretical = (1 / np.sqrt(np.pi)) * (1 / a0**(3/2)) * np.exp(-r / a0)
