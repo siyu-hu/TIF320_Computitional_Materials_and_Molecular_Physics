@@ -3,6 +3,8 @@ Assignments 2025
 
 Author: Siyu Hu and Jingyi Zhou | University of Gothenburg & Chalmers University
 
+Overall grade: 5/5 ✅ （only based on 5 assignments）.
+
 * **Assignment 1: The basics of how to run GPAW ( 10/10 points)**
 * **Assignment 2: Structure of Sodium Nanoclusters (?/20 points)**
 * **Assignment 3: Bulk and surface properties of Na (?/20 points)**
