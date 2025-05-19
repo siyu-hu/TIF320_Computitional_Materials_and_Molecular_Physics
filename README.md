@@ -1,12 +1,12 @@
 # TIF320_Computitional_Materials_and_Molecular_Physics
 Assignments 2025
 
-Author: Siyu Hu and Jingyi Zhou
+Author: Siyu Hu and Jingyi Zhou | University of Gothenburg & Chalmers University
 
-* **Assignment 1: The basics of how to run GPAW ( x/10 points)**
-* **Assignment 2: Structure of Sodium Nanoclusters (x/20 points)**
-* **Assignment 3: Bulk and surface properties of Na (x/20 points)**
-* **Assignment 4: From Nanoparticles to Bulk (x/20 points)**
+* **Assignment 1: The basics of how to run GPAW ( 10/10 points)**
+* **Assignment 2: Structure of Sodium Nanoclusters (?/20 points)**
+* **Assignment 3: Bulk and surface properties of Na (?/20 points)**
+* **Assignment 4: From Nanoparticles to Bulk (?/20 points)**
    * Create Wulff shaped nanoparticles
    * Relax the nanoparticles
    * Calculate the density of states for all Wulff-shaped nanoparticles
